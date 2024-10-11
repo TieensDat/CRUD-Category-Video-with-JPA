@@ -45,7 +45,7 @@ public class VideoDao implements IVideoDao{
 		}
 	}
 	@Override
-	public void delete(int videoid) throws Exception {
+	public void delete(String videoid) throws Exception {
 		EntityManager enma = JPAConfig.getEntityManager();
 		EntityTransaction trans = enma.getTransaction();
 		try {
@@ -66,7 +66,7 @@ public class VideoDao implements IVideoDao{
 		}
 	}
 	@Override
-	public Video findById(int videoId) {
+	public Video findById(String videoId) {
 		EntityManager enma = JPAConfig.getEntityManager();
 		Video video = enma.find(Video.class, videoId);
 		return video;
@@ -82,7 +82,7 @@ public class VideoDao implements IVideoDao{
 		EntityManager enma = JPAConfig.getEntityManager();
 		String jpql = "SELECT v FROM Video v Where v.videoid like :videoid";
 		TypedQuery<Video> query = enma.createQuery(jpql, Video.class);
-		query.setParameter("vidname", "%" + vidname + "%");
+		query.setParameter("videoid", "%" + vidname + "%");
 		return query.getResultList();
 	}
 	@Override
